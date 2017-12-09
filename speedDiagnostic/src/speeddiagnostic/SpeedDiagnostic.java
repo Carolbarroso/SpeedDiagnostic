@@ -26,7 +26,7 @@ public class SpeedDiagnostic {
   public static void writeInFile(String[] result) throws IOException{
       
       String line[];
-      try (FileWriter arq = new FileWriter("/home/natan/Desktop/teste.txt")) {
+      try (FileWriter arq = new FileWriter("result.txt")) {
           PrintWriter gravarArq = new PrintWriter(arq);
           for(int i=1;i<result.length;i++){
               
