@@ -9,6 +9,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Arrays;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Scanner;
 
 /**
  *
@@ -16,48 +22,41 @@ import java.io.InputStreamReader;
  */
 public class SpeedDiagnostic {
 
-    /**
-     * @param args the command line arguments
-     */
-        // TODO code application logic here
-        /*Process exec;  
-        try {  
-            exec = Runtime.getRuntime().exec("ipconfig");  
-            if ( exec.waitFor() == 0)  
-                System.out.println("Executado.");  
-            else  
-                System.out.println("ERRO");  
-        } catch (IOException e) {  
-            e.printStackTrace();  
-        } catch (InterruptedException e) {  
-            e.printStackTrace();  
-        }*//*
-
-  try {
-    // Use a ProcessBuilder
-    ProcessBuilder pb = new ProcessBuilder("ping 158.69.55.227");
-
-    Process p = pb.start();
-    InputStream is = p.getInputStream();
-    BufferedReader br = new BufferedReader(new InputStreamReader(is));
-    String line = null;
-    while ((line = br.readLine()) != null) {
-      System.out.println(line);
-    }
-    int r = p.waitFor(); // Let the process finish.
-    if (r == 0) { // No error
-       // run cmd2.
-    }
-  } catch (Exception e) {
-    e.printStackTrace();
-  }
-        
-    }
+   
+  public static void writeInFile(String[] result) throws IOException{
+      
+      String line[];
+      try (FileWriter arq = new FileWriter("/home/natan/Desktop/teste.txt")) {
+          PrintWriter gravarArq = new PrintWriter(arq);
+          for(int i=1;i<result.length;i++){
+              
+              if(i==result.length-3 || i==result.length-4){
+                  
+              }else{
+                  try{
+                       line=result[i].split("time=")[1].split(" ms");
+                        gravarArq.println(line[0]);
+                  }
+                  catch(Exception e){
+                      gravarArq.println(result[i]);
+                  }
+                  
+                 
+              }
+              
+          }
+          
+      }
+ 
     
-}*/
-        
-  public static void runSystemCommand(String command) {
-
+  }
+      
+  
+  
+  public static String[] runSystemCommand(String command,String packagesCounter) {
+                int packagesCounterInt=Integer.parseInt(packagesCounter);
+                String result[]= new String[packagesCounterInt+5];
+            
 		try {
 			Process p = Runtime.getRuntime().exec(command);
 			BufferedReader inputStream = new BufferedReader(
@@ -65,21 +64,24 @@ public class SpeedDiagnostic {
 
 			String s = "";
 			// reading output stream of the command
-			while ((s = inputStream.readLine()) != null) {
-				System.out.println(s);
-			}
-
+                        for(int i=0;i<result.length;i++){
+                            s = inputStream.readLine();
+                            result[i]=s;
+                        }
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+            return result;
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		
-		String ip = "vivas.eng.br";
-		runSystemCommand("ping -t " + ip);
-
-	
+		String ipOrURL = "vivas.eng.br";
+                String packagesCounter = "4";
+		String result[]=runSystemCommand("ping -c " + packagesCounter +" " + ipOrURL,packagesCounter);
+              //  System.out.println(Arrays.toString(result));
+              SpeedDiagnostic.writeInFile(result);
 	}
 }
 
