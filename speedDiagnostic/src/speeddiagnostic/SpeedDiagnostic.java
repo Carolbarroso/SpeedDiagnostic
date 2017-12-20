@@ -22,66 +22,10 @@ import java.util.Scanner;
  */
 public class SpeedDiagnostic {
 
-   
-  public static void writeInFile(String[] result) throws IOException{
-      
-      String line[];
-      try (FileWriter arq = new FileWriter("result.txt")) {
-          PrintWriter gravarArq = new PrintWriter(arq);
-          for(int i=1;i<result.length;i++){
-              
-              if(i==result.length-3 || i==result.length-4){
-                  
-              }else{
-                  try{
-                       line=result[i].split("time=")[1].split(" ms");
-                        gravarArq.println(line[0]);
-                  }
-                  catch(Exception e){
-                      gravarArq.println(result[i]);
-                  }
-                  
-                 
-              }
-              
-          }
-          
-      }
- 
-    
-  }
-      
-  
-  
-  public static String[] runSystemCommand(String command,String packagesCounter) {
-                int packagesCounterInt=Integer.parseInt(packagesCounter);
-                String result[]= new String[packagesCounterInt+5];
-            
-		try {
-			Process p = Runtime.getRuntime().exec(command);
-			BufferedReader inputStream = new BufferedReader(
-					new InputStreamReader(p.getInputStream()));
-
-			String s = "";
-			// reading output stream of the command
-                        for(int i=0;i<result.length;i++){
-                            s = inputStream.readLine();
-                            result[i]=s;
-                        }
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-            return result;
-	}
-
 	public static void main(String[] args) throws IOException {
 		
-		String ipOrURL = "vivas.eng.br";
-                String packagesCounter = "4";
-		String result[]=runSystemCommand("ping -c " + packagesCounter +" " + ipOrURL,packagesCounter);
-              //  System.out.println(Arrays.toString(result));
-              SpeedDiagnostic.writeInFile(result);
-	}
+             new GraphicWindow().setVisible(true);
+           
+        }
 }
 
