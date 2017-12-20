@@ -27,10 +27,10 @@ public class GraphicsResults {
           
         for(PingResult result : List){
             if(result.getICMP_SEQ()%PingTest.getDivideX()==0 || result.getICMP_SEQ()==1 || PingTest.getPackagesCounter()==result.getICMP_SEQ()){
-                dataset.addValue(result.getTIME_MS(),"tempo",result.getICMP_SEQ());
+                dataset.addValue(result.getTIME_MS(),"atraso",result.getICMP_SEQ());
             }
             else{
-                dataset.addValue(result.getTIME_MS(),"tempo","");
+                dataset.addValue(result.getTIME_MS(),"atraso","");
             }
             
         }
