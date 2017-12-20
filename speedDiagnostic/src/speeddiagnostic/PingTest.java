@@ -18,10 +18,12 @@ public class PingTest {
     private static String ipOrURL;
     private static Integer packagesCounter;
     private static ArrayList<PingResult> resultList;
+    private static Integer divideX; 
 
-    public static void set(String ipOrURL, Integer packagesCounter) {
+    public static void set(String ipOrURL, Integer packagesCounter, Integer divideX) {
         PingTest.ipOrURL = ipOrURL;
         PingTest.packagesCounter = packagesCounter;
+        PingTest.divideX=divideX;
         PingTest.resultList = new ArrayList<>();
     }
 
@@ -31,6 +33,10 @@ public class PingTest {
 
     public static Integer getPackagesCounter() {
         return packagesCounter;
+    }
+
+    public static Integer getDivideX() {
+        return divideX;
     }
 
     private static String[] fullResult() {
