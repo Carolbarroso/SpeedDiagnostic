@@ -21,7 +21,7 @@ public class GraphicWindow extends javax.swing.JFrame {
     public GraphicWindow() {
         initComponents();
         
-        PingTest.set("158.69.55.227", 20);
+        PingTest.set("www.vivas.eng.br", 4);
         ArrayList<PingResult> lista = PingTest.resultTreatment();
         
         GraphicsResults grafico = new GraphicsResults();

@@ -26,7 +26,7 @@ public class GraphicsResults {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         
         for(PingResult result : List){
-            dataset.addValue(result.getTIME_MS(),"time",result.getICMP_SEQ());
+            dataset.addValue(result.getTIME_MS(),"tempo",result.getICMP_SEQ());
         }
         return dataset;
     }

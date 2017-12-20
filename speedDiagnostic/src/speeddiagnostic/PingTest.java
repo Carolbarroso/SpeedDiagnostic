@@ -59,23 +59,21 @@ public class PingTest {
 
     public static ArrayList<PingResult> resultTreatment() {
         String result[] = PingTest.fullResult();
-        String time;
-        String icmp;
-        for (int i = 1; i < result.length; i++) {
+        String time=" ";
+        String icmp= " ";
+        for (int i = 1; i < result.length-4; i++) {
 
-            if (i == result.length - 3 || i == result.length - 4) {
-                //linhas ignoradas
-            } else {
                 try {
-                    time = result[i].split("time=")[1].split(" ms")[0];
                     icmp = result[i].split("=")[1].split(" ")[0];
-                    PingResult ping = new PingResult(Integer.parseInt(icmp),Double.parseDouble(time));
-                    PingTest.resultList.add(ping);
+                    time = result[i].split("time=")[1].split(" ms")[0];
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    time="0";
+                } finally {
+                    PingResult ping = new PingResult(Integer.parseInt(icmp), Double.parseDouble(time));
+                    PingTest.resultList.add(ping);
                 }
 
-            }
+            
         }
         return PingTest.resultList;
     }
