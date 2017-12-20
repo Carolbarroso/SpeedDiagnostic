@@ -15,17 +15,25 @@ import java.util.ArrayList;
  */
 public class PingTest {
 
-    private String ipOrURL;
-    private Integer packagesCounter;
-    private ArrayList<PingResult> resultList;
+    private static String ipOrURL;
+    private static Integer packagesCounter;
+    private static ArrayList<PingResult> resultList;
 
-    public PingTest(String ipOrURL, Integer packagesCounter) {
-        this.ipOrURL = ipOrURL;
-        this.packagesCounter = packagesCounter;
-        this.resultList = new ArrayList<>();
+    public static void set(String ipOrURL, Integer packagesCounter) {
+        PingTest.ipOrURL = ipOrURL;
+        PingTest.packagesCounter = packagesCounter;
+        PingTest.resultList = new ArrayList<>();
     }
 
-    private String[] run() {
+    public static String getIpOrURL() {
+        return ipOrURL;
+    }
+
+    public static Integer getPackagesCounter() {
+        return packagesCounter;
+    }
+
+    private static String[] fullResult() {
 
         String command = "ping -c " + packagesCounter.toString() + " " + ipOrURL;
 
@@ -49,8 +57,8 @@ public class PingTest {
         return result;
     }
 
-    public ArrayList<PingResult> resultTreatment() {
-        String result[] = this.run();
+    public static ArrayList<PingResult> resultTreatment() {
+        String result[] = PingTest.fullResult();
         String time;
         String icmp;
         for (int i = 1; i < result.length; i++) {
@@ -62,14 +70,14 @@ public class PingTest {
                     time = result[i].split("time=")[1].split(" ms")[0];
                     icmp = result[i].split("=")[1].split(" ")[0];
                     PingResult ping = new PingResult(Integer.parseInt(icmp),Double.parseDouble(time));
-                    this.resultList.add(ping);
+                    PingTest.resultList.add(ping);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
 
             }
         }
-        return this.resultList;
+        return PingTest.resultList;
     }
 
 }

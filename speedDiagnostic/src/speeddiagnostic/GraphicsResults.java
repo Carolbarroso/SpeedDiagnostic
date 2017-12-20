@@ -32,7 +32,7 @@ public class GraphicsResults {
     }
     
     public JFreeChart createGraphic(CategoryDataset dataset){
-        JFreeChart grafico = ChartFactory.createLineChart("Relatório de atraso", "icmp", "ms", dataset, PlotOrientation.VERTICAL, true, true, false);
+        JFreeChart grafico = ChartFactory.createLineChart("Relatório de atraso para " + PingTest.getIpOrURL(), "icmp", "ms", dataset, PlotOrientation.VERTICAL, true, true, true);
         //JFreeChart grafico = ChartFactory.createBarChart("Relatório para ", " ", "ms", dataset,PlotOrientation.VERTICAL,true,false,false);
         return grafico;
     }
